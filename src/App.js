@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
+import TextForm from './components/TextForm';
+import Alert from './components/Alert';
+import { useState } from 'react';
 
 function App() {
+  const [alert, setAlert] = useState(null);
+  const [mode, setMode] = useState({
+    "background": "white",
+    "button": "primary",
+    "color": "black",
+    "nav": "light"
+  })
+  const  changeAlert = async (msg) => {
+    setInterval(() => {
+      setAlert(null)
+    }, 5000);
+    setAlert(msg);
+  }
+
+  function setTheme(bg,but,col,nav)
+  {
+    setMode({
+      "background":bg,
+      "button": but,
+      "color": col,
+      "nav": nav
+    });
+    document.body.style.backgroundColor = bg;
+    document.body.style.color = col;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <NavBar showAlert={changeAlert} color={mode.color} nav={mode.nav} setTheme={setTheme}/>
+    <Alert alert={alert}/>
+      <TextForm color={mode.background} but={mode.button} />
+    </>
   );
 }
 
