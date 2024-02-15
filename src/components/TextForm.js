@@ -24,7 +24,7 @@ export default function TextForm(props) {
 
   async function showSummary() {
     try {
-      const openai = new OpenAI({apiKey: "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", dangerouslyAllowBrowser: true});
+      const openai = new OpenAI({apiKey: "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", dangerouslyAllowBrowser: true});
       const completion = await openai.chat.completions.create({
         messages: [{ role: 'system', content: `Summarize this text ${text}` }],
         model: 'gpt-3.5-turbo',
